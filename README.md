@@ -46,40 +46,53 @@ It includes dynamic logic, modern design, and scalable code structure.
 ---
 
 ## 📜 4. Question Bank Format
-
 ```js
-const questionBank = [
-  {
-    question: "What is closure in JavaScript?",
-    options: [
-      "Inner function",
-      "Prototype",
-      "Event loop",
-      "Variable scope"
-    ],
-    answer: 0
-  }
-];
-✔️ Simple JSON format with one correct answer index.
+    const questionBank = [
+    {
+        question: "What is closure in JavaScript?",
+        options: [
+        "Inner function",
+        "Prototype",
+        "Event loop",
+        "Variable scope"
+        ],
+        answer: 0
+    }
+    ]
+```
+    ✔️ Simple JSON format with one correct answer index.
 
-🧠 5. Core JavaScript Functions
-Key Methods Used
-Array.sort() – Shuffle questions
+---
 
-Array.fill() – Initialize user answer state
+## 🧠 5. Core JavaScript Functions
+We used fundamental and advanced JavaScript methods to make the quiz dynamic and interactive.
 
-setInterval() – Timer countdown
+### 🔧 Core Methods:
 
-querySelectorAll() – Select buttons
+- **`Array.sort()`** – Used to shuffle the question bank randomly.
+- **`Array.fill()`** – Initialized the user answer array.
+- **`setInterval()`** – Managed countdown timer execution.
+- **`querySelectorAll()`** – Selected buttons for disabling or styling.
+- **`addEventListener()`** – Captured quiz submissions and button clicks.
 
-addEventListener() – Event handling
+### 🧠 Code Logic Breakdown:
+```js
+function renderQuiz() {
+  // Displays all 30 random questions
+}
 
-Logic Functions
-renderQuiz();   // Renders each question to DOM
-submitQuiz();   // Calculates and shows score
-startTimer();   // Begins 2-minute countdown
+function submitQuiz() {
+  // Scores and displays answers visually
+}
 
-🧪 6. UX Optimizations
+function startTimer() {
+  // Countdown timer that auto-submits at zero
+}
+```
+
+---
+
+## 🧪 6. UX Optimizations
 ✅ Sticky timer bar for test pressure
 
 ✅ Bold styling on selected options
@@ -92,18 +105,23 @@ startTimer();   // Begins 2-minute countdown
 
 💡 Good UX improves user engagement and fairness in tests.
 
-🔄 7. Multi-Page Flow
-guidelines.html ➡ index.html ➡ results.html
+---
 
-🧭 Step-by-Step Flow:
+## 🔄 7. Multi-Page Flow
+This quiz was split into three functional pages to simulate a real-world exam experience:
 
-Guidelines Page – Shows quiz instructions
+| Page              | Purpose                                          |
+| ----------------- | ------------------------------------------------ |
+| `guidelines.html` | 📋 Shows instructions and quiz policy            |
+| `index.html`      | 🎯 Main quiz interface with timer                |
+| `results.html`    | 🧾 Score display and review of incorrect answers |
 
-Quiz Interface – Timer-based multiple choice quiz
+📍 Flow Diagram:
+Start → Guidelines → Quiz → Results → [Review Wrong Answers]
 
-Result Page – Shows score and incorrect answers
+---
 
-🧱 8. Optional Improvements
+## 🧱 8. Optional Improvements
 Here are ways to make the app production-grade:
 
 🧾 Export scores as downloadable PDF
@@ -116,18 +134,24 @@ Here are ways to make the app production-grade:
 
 🔐 Add login/auth for personalized sessions
 
-🚀 9. Deployment Tips
-📦 Recommended Platforms:
+---
 
-GitHub Pages
+## 🚀 9. Deployment Tips
+You can host this app easily using modern frontend platforms:
 
-Netlify
+🌍 GitHub Pages – Quick and free
 
-Vercel
+⚡ Netlify – CI/CD with custom domains
+
+📦 Vercel – Perfect for frontend-focused apps
+
+💡 Pro Tip: If using a backend, hide credentials with .env and a secrets manager.
 
 💡 Use environment variables or secure APIs for backend integration if needed.
 
-👨‍💻 Created by Bukunmi Israel Adesayo
+---
+
+## 👨‍💻 Created by Bukunmi Israel Adesayo
 Full-stack developer with a passion for clean design, developer education, and building tech solutions.
 🌍 LinkedIn | ✉️ Email
 
