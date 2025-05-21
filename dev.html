@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        input[type="button"] {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            width: 210px;
+            height: 40px;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <form name="calcform">
+        <input type="text" name="txt1" id="display" readonly><br>
+
+        <!-- Row 1 -->
+        <input type="button" value="7" onclick="appendNumber('7')">
+        <input type="button" value="8" onclick="appendNumber('8')">
+        <input type="button" value="9" onclick="appendNumber('9')">
+        <input type="button" value="/" onclick="appendOperator('/')"><br>
+
+        <!-- Row 2 -->
+        <input type="button" value="4" onclick="appendNumber('4')">
+        <input type="button" value="5" onclick="appendNumber('5')">
+        <input type="button" value="6" onclick="appendNumber('6')">
+        <input type="button" value="*" onclick="appendOperator('*')"><br>
+
+        <!-- Row 3 -->
+        <input type="button" value="1" onclick="appendNumber('1')">
+        <input type="button" value="2" onclick="appendNumber('2')">
+        <input type="button" value="3" onclick="appendNumber('3')">
+        <input type="button" value="-" onclick="appendOperator('-')"><br>
+
+        <!-- Row 4 -->
+        <input type="button" value="0" onclick="appendNumber('0')">
+        <input type="button" value="C" onclick="clearDisplay()">
+        <input type="button" value="=" onclick="calculate()">
+        <input type="button" value="+" onclick="appendOperator('+')"><br>
+    </form>
+
+    <script>
+        // Append numbers to the input
+        function appendNumber(num) {
+            document.calcform.txt1.value += num;
+        }
+
+        // Append operators to the input
+        function appendOperator(op) {
+            const current = document.calcform.txt1.value;
+            // Prevent adding operator at the start or two in a row
+            if (current !== '' && !isOperator(current.slice(-1))) {
+                document.calcform.txt1.value += op;
+            }
+        }
+
+        // Check if character is an operator
+        function isOperator(char) {
+            return ['+', '-', '*', '/'].includes(char);
+        }
+
+        // Clear the display
+        function clearDisplay() {
+            document.calcform.txt1.value = '';
+        }
+
+        // Calculate the result
+        function calculate() {
+            try {
+                const result = eval(document.calcform.txt1.value);
+                document.calcform.txt1.value = result;
+            } catch (error) {
+                document.calcform.txt1.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>

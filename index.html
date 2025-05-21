@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JS/TS Quiz - Welcome</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #f4f4f4; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2c3e50; }
+    ul { line-height: 1.8; }
+    button {
+      padding: 12px 25px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to the JavaScript/TypeScript Quiz</h1>
+    <p>Please read the following guidelines before starting:</p>
+    <ul>
+      <li>You have 2 minutes to complete 30 randomly selected questions.</li>
+      <li>Each question has one correct answer.</li>
+      <li>You won't see the correct answers until after submission.</li>
+      <li>Your score and review will be shown at the end.</li>
+    </ul>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <script>
+    function startQuiz() {
+      // Clear previous quiz data
+      localStorage.clear();
+      window.location.href = 'quiz.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Interview Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .correct {
+      color: green;
+    }
+    .wrong {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Interview Prep Quiz</h1>
+  <div id="quiz"></div>
+
+  <script>
+    const questions = [
+      {
+        question: "What is the type of typeof null?",
+        options: ["null", "object", "undefined", "function"],
+        answer: 1
+      },
+      {
+        question: "What will this log? function greet() { console.log(\"Hi\"); } greet();",
+        options: ["Error", "undefined", "Hi", "Nothing"],
+        answer: 2
+      },
+      {
+        question: "What concept allows inner() to access count?",
+        options: ["Hoisting", "Closure", "Inheritance", "Scope chain"],
+        answer: 1
+      },
+      {
+        question: "What will the Promise example output after 1 second?",
+        options: ["Done!", "undefined", "Error", "Nothing"],
+        answer: 0
+      },
+      {
+        question: "Which of the following is true about IIFEs?",
+        options: ["They pollute global scope", "They run only on page load", "They help encapsulate variables", "They throw errors"],
+        answer: 2
+      },
+      {
+        question: "What is the output of: let x = 10; if (true) { let x = 20; console.log(x); } console.log(x);",
+        options: ["20 and 20", "20 and undefined", "20 and 10", "Error"],
+        answer: 2
+      }
+    ];
+
+    const quiz = document.getElementById('quiz');
+
+    questions.forEach((q, idx) => {
+      const container = document.createElement('div');
+      container.classList.add('question');
+
+      const question = document.createElement('h2');
+      question.textContent = `Q${idx + 1}: ${q.question}`;
+      container.appendChild(question);
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (i === q.answer) {
+            btn.classList.add('correct');
+            btn.textContent += " ✓";
+          } else {
+            btn.classList.add('wrong');
+            btn.textContent += " ✗";
+          }
+          container.querySelectorAll('button').forEach(b => b.disabled = true);
+        };
+        container.appendChild(btn);
+        container.appendChild(document.createElement('br'));
+      });
+
+      quiz.appendChild(container);
+    });
+  </script>
+</body>
+</html>

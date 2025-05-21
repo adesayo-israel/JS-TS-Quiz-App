@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Interview Quiz</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      margin: 10px 0;
+    }
+    .question {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      margin-right: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: #3498db;
+      color: white;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .correct {
+      background-color: #2ecc71 !important;
+    }
+    .wrong {
+      background-color: #e74c3c !important;
+    }
+    #submitBtn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 25px;
+      font-size: 18px;
+    }
+    #result {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JS/TS Quiz</h1>
+    <div id="timer">Time Left: 2:00</div>
+  </header>
+  <main>
+    <div id="quiz"></div>
+    <button id="submitBtn">Submit Quiz</button>
+    <div id="result"></div>
+  </main>
+
+  <script src="questions.js"></script>
+<script>
+  // Shuffle and pick 30 questions
+  const shuffle = (array) => array.sort(() => Math.random() - 0.5);
+  const questions = shuffle(questionBank).slice(0, 30);
+
+  let userAnswers = Array(questions.length).fill(null);
+  let score = 0;
+  let timeLeft = 120;
+
+  const quiz = document.getElementById('quiz');
+  const result = document.getElementById('result');
+  const submitBtn = document.getElementById('submitBtn');
+  const timerDisplay = document.getElementById('timer');
+
+  function renderQuiz() {
+    questions.forEach((q, idx) => {
+      const container = document.createElement('div');
+      container.classList.add('question');
+
+      const question = document.createElement('h2');
+      question.textContent = `Q${idx + 1}: ${q.question}`;
+      container.appendChild(question);
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => {
+          userAnswers[idx] = i;
+          container.querySelectorAll('button').forEach(b => b.disabled = true);
+          btn.style.fontWeight = 'bold';
+        };
+        container.appendChild(btn);
+      });
+
+      quiz.appendChild(container);
+    });
+  }
+
+  function submitQuiz() {
+  questions.forEach((q, i) => {
+    const container = quiz.children[i];
+    const buttons = container.querySelectorAll('button');
+    buttons.forEach((btn, idx) => {
+      if (idx === q.answer) {
+        btn.classList.add('correct');
+      }
+      if (userAnswers[i] === idx && idx !== q.answer) {
+        btn.classList.add('wrong');
+      }
+    });
+    if (userAnswers[i] === q.answer) score++;
+  });
+
+  // Save data to localStorage
+  localStorage.setItem('score', score);
+  localStorage.setItem('total', questions.length);
+  localStorage.setItem('questions', JSON.stringify(questions));
+  localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
+
+  window.location.href = 'result.html';
+}
+
+
+  function startTimer() {
+    const interval = setInterval(() => {
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        submitQuiz();
+        return;
+      }
+      timeLeft--;
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }, 1000);
+  }
+
+  submitBtn.addEventListener('click', submitQuiz);
+  renderQuiz();
+  startTimer();
+</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Interview Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .correct {
+      color: green;
+    }
+    .wrong {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Interview Prep Quiz</h1>
+  <div id="quiz"></div>
+
+  <script>
+    const questions = [
+      {
+        question: "What is the type of typeof null?",
+        options: ["null", "object", "undefined", "function"],
+        answer: 1
+      },
+      {
+        question: "What will this log? function greet() { console.log(\"Hi\"); } greet();",
+        options: ["Error", "undefined", "Hi", "Nothing"],
+        answer: 2
+      },
+      {
+        question: "What concept allows inner() to access count?",
+        options: ["Hoisting", "Closure", "Inheritance", "Scope chain"],
+        answer: 1
+      },
+      {
+        question: "What will the Promise example output after 1 second?",
+        options: ["Done!", "undefined", "Error", "Nothing"],
+        answer: 0
+      },
+      {
+        question: "Which of the following is true about IIFEs?",
+        options: ["They pollute global scope", "They run only on page load", "They help encapsulate variables", "They throw errors"],
+        answer: 2
+      },
+      {
+        question: "What is the output of: let x = 10; if (true) { let x = 20; console.log(x); } console.log(x);",
+        options: ["20 and 20", "20 and undefined", "20 and 10", "Error"],
+        answer: 2
+      },
+      {
+        question: "What does the Event Loop do in JavaScript?",
+        options: [
+          "Blocks execution until all code is done",
+          "Executes async callbacks after the stack is clear",
+          "Skips async code",
+          "Executes everything in parallel"
+        ],
+        answer: 1
+      },
+      {
+        question: "Which of the following is true about async/await?",
+        options: [
+          "It blocks the call stack",
+          "It replaces Promises",
+          "It simplifies writing async code",
+          "It can be used outside functions"
+        ],
+        answer: 2
+      },
+      {
+        question: "What is the result of '1' + 2 + 3?",
+        options: ["123", "6", "33", "Error"],
+        answer: 0
+      },
+      {
+        question: "What is the output of 1 == '1' and 1 === '1'?",
+        options: ["true and true", "true and false", "false and true", "false and false"],
+        answer: 1
+      },
+      {
+        question: "Which variable declaration is block scoped?",
+        options: ["var", "let", "const", "let and const"],
+        answer: 3
+      },
+      {
+        question: "What is the value of 'this' inside a regular function in strict mode?",
+        options: ["undefined", "global", "window", "null"],
+        answer: 0
+      },
+      {
+        question: "Which method is used to create a new object from a prototype?",
+        options: ["Object.assign", "Object.create", "Object.clone", "Object.inherit"],
+        answer: 1
+      },
+      {
+        question: "Which pattern is used to delay execution until a pause in input?",
+        options: ["Throttling", "Debouncing", "Memoization", "Closure"],
+        answer: 1
+      },
+      {
+        question: "Which pattern limits function execution to once per time period?",
+        options: ["Debouncing", "Throttling", "Memoization", "Closure"],
+        answer: 1
+      },
+      {
+        question: "What is currying?",
+        options: [
+          "Transforming a function with multiple arguments into nested single-argument functions",
+          "Reducing function arguments",
+          "Memoizing a function",
+          "Executing a function immediately"
+        ],
+        answer: 0
+      },
+      {
+        question: "What is the output of (() => typeof arguments)()?",
+        options: ["object", "undefined", "function", "array"],
+        answer: 1
+      },
+      {
+        question: "Which operator is used to spread an array into individual elements?",
+        options: ["...", "*", "&&", "||"],
+        answer: 0
+      },
+      {
+        question: "What keyword is used to export a function in ES6 module?",
+        options: ["export", "module", "require", "return"],
+        answer: 0
+      },
+      {
+        question: "Which feature allows default values in function parameters?",
+        options: ["Destructuring", "ES6 Default Parameters", "Spread operator", "Arrow functions"],
+        answer: 1
+      },
+      {
+        question: "Which data structure does Set resemble most?",
+        options: ["Array", "Map", "Object", "Stack"],
+        answer: 0
+      },
+      {
+        question: "Which object method converts a JSON string to an object?",
+        options: ["JSON.toObject", "JSON.stringify", "JSON.parse", "JSON.convert"],
+        answer: 2
+      },
+      {
+        question: "What does NaN === NaN return?",
+        options: ["true", "false", "Error", "undefined"],
+        answer: 1
+      },
+      {
+        question: "Which method is used to copy all enumerable properties from one or more objects to a target object?",
+        options: ["Object.assign", "Object.copy", "Object.merge", "Object.join"],
+        answer: 0
+      },
+      {
+        question: "Which TypeScript keyword is used to define a custom data type?",
+        options: ["type", "interface", "class", "any"],
+        answer: 0
+      },
+      {
+        question: "Which of these TypeScript types allows any value?",
+        options: ["any", "unknown", "never", "void"],
+        answer: 0
+      },
+      {
+        question: "Which of these types represents no value in TypeScript?",
+        options: ["void", "never", "null", "undefined"],
+        answer: 0
+      },
+      {
+        question: "What does keyof T return in TypeScript?",
+        options: ["Values", "Keys", "Types", "Strings"],
+        answer: 1
+      },
+      {
+        question: "What does the 'as' keyword do in TypeScript?",
+        options: ["Casts type", "Declares variable", "Imports module", "Exports function"],
+        answer: 0
+      },
+      {
+        question: "Which utility type makes all properties optional?",
+        options: ["Partial", "Optional", "Nullable", "Loose"],
+        answer: 0
+      }
+    ];
+
+    const quiz = document.getElementById('quiz');
+
+    questions.forEach((q, idx) => {
+      const container = document.createElement('div');
+      container.classList.add('question');
+
+      const question = document.createElement('h2');
+      question.textContent = `Q${idx + 1}: ${q.question}`;
+      container.appendChild(question);
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (i === q.answer) {
+            btn.classList.add('correct');
+            btn.textContent += " ✓";
+          } else {
+            btn.classList.add('wrong');
+            btn.textContent += " ✗";
+          }
+          container.querySelectorAll('button').forEach(b => b.disabled = true);
+        };
+        container.appendChild(btn);
+        container.appendChild(document.createElement('br'));
+      });
+
+      quiz.appendChild(container);
+    });
+  </script>
+</body>
+</html>
